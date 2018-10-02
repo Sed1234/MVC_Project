@@ -1,0 +1,80 @@
+﻿@model SaleCo.Models.ITEMS_PURCHASE
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ITEMS_PURCHASE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PURCHASE_NUMBER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PURCHASE_NUMBER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRICE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRICE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QUANTITY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QUANTITY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PURCHASE_DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PURCHASE_DATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ITEMS.ITEM_DESRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ITEMS.ITEM_DESRIPTION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STOCKS.ADDRESS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STOCKS.ADDRESS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SUPPLIERS.SUPPLIERS_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SUPPLIERS.SUPPLIERS_NAME)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

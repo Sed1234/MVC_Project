@@ -1,0 +1,66 @@
+﻿@model SaleCo.Models.MOVE_ORDERS
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MOVE_ORDERS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MOVE_ORDER_NUMBER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOVE_ORDER_NUMBER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRICE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRICE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QUANTITY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QUANTITY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ITEMS.ITEM_DESRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ITEMS.ITEM_DESRIPTION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STOCKS.ADDRESS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STOCKS.ADDRESS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STORE.STORE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STORE.STORE_NAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MOVE_ORDER_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

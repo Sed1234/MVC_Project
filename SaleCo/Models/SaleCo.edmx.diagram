@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b79e97a820c64ff9b4712a9b426f51ea" Name="Diagram1">
+        <EntityTypeShape EntityType="TestDBModel.BUYERS" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDBModel.DISTRICT" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDBModel.ITEMS" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDBModel.ITEMS_CATEGORY" Width="1.5" PointX="7.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDBModel.ITEMS_PURCHASE" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDBModel.MOVE_ORDERS" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDBModel.SALES" Width="1.5" PointX="8.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDBModel.SALES_STORE" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDBModel.STOCKS" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDBModel.STORE" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDBModel.SUPPLIERS" Width="1.5" PointX="0.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDBModel.WAREHOUSE" Width="1.5" PointX="8.75" PointY="8.375" IsExpanded="true" />
+        <AssociationConnector Association="TestDBModel.FK__SALES_STO__BUYER__5D95E53A" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDBModel.FK__ITEMS_PUR__ITEM___56E8E7AB" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDBModel.FK__MOVE_ORDE__ITEM___0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDBModel.FK__SALES_STO__ITEM___5BAD9CC8" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDBModel.FK__ITEMS_PUR__STOCK__57DD0BE4" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDBModel.FK__ITEMS_PUR__SUPPL__58D1301D" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDBModel.FK__MOVE_ORDE__STOCK__0C85DE4D" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDBModel.FK__MOVE_ORDE__STORE__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDBModel.FK__SALES_STO__STORE__5CA1C101" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

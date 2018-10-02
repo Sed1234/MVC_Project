@@ -1,0 +1,776 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище TestDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BUYERS">
+          <Key>
+            <PropertyRef Name="BUYER_ID" />
+          </Key>
+          <Property Name="BUYER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BUYER_NAME" Type="varchar" MaxLength="150" />
+          <Property Name="ADDRESS" Type="varchar" MaxLength="150" />
+          <Property Name="PHONE_NUMBER" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="DISTRICT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="ITEMS">
+          <Key>
+            <PropertyRef Name="ITEM_ID" />
+          </Key>
+          <Property Name="ITEM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ITEM_DESRIPTION" Type="varchar" MaxLength="150" />
+          <Property Name="CATEGORY_ID" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="ITEMS_CATEGORY">
+          <Key>
+            <PropertyRef Name="CATEGORY_ID" />
+          </Key>
+          <Property Name="CATEGORY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CATEGORY_DESRIPTION" Type="varchar" MaxLength="150" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="ITEMS_PURCHASE">
+          <Key>
+            <PropertyRef Name="PURCHASE_ID" />
+          </Key>
+          <Property Name="PURCHASE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PURCHASE_NUMBER" Type="varchar(max)" Nullable="false" />
+          <Property Name="ITEM_ID" Type="int" />
+          <Property Name="PRICE" Type="float" />
+          <Property Name="QUANTITY" Type="float" />
+          <Property Name="PURCHASE_DATE" Type="date" />
+          <Property Name="STOCK_ID" Type="int" />
+          <Property Name="SUPPLIER_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="MOVE_ORDERS">
+          <Key>
+            <PropertyRef Name="MOVE_ORDER_ID" />
+          </Key>
+          <Property Name="MOVE_ORDER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MOVE_ORDER_NUMBER" Type="varchar" MaxLength="150" />
+          <Property Name="ITEM_ID" Type="int" />
+          <Property Name="PRICE" Type="float" />
+          <Property Name="QUANTITY" Type="float" />
+          <Property Name="STORE_ID" Type="int" />
+          <Property Name="STOCK_ID" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "TestDB.dbo.QUANTITY_IN_STORE" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="QUANTITY_IN_STORE">
+          <Property Name="STORE_ID" Type="int" />
+          <Property Name="AVG_PRICE" Type="float" />
+          <Property Name="QUANTITY" Type="float" />
+          <Property Name="ITEM_ID" Type="int" />
+        </EntityType>-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "TestDB.dbo.QUANTITY_ORDERED" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="QUANTITY_ORDERED">
+          <Property Name="STOCK_ID" Type="int" />
+          <Property Name="AVG_PRICE" Type="float" />
+          <Property Name="QUANTITY" Type="float" />
+          <Property Name="ITEM_ID" Type="int" />
+        </EntityType>-->
+        <EntityType Name="SALES">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ORDER_NUMBER" Type="varchar" MaxLength="150" />
+          <Property Name="ITEM_ID" Type="int" />
+          <Property Name="PRICE" Type="float" />
+          <Property Name="OREDER_QUANTITY" Type="float" />
+          <Property Name="CREATION_DATE" Type="date" />
+        </EntityType>
+        <EntityType Name="SALES_STORE">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ORDER_NUMBER" Type="varchar" MaxLength="150" />
+          <Property Name="ITEM_ID" Type="int" />
+          <Property Name="PRICE" Type="float" />
+          <Property Name="QUANTITY" Type="float" />
+          <Property Name="PURCHASE_DATE" Type="date" />
+          <Property Name="STORE_ID" Type="int" />
+          <Property Name="BUYER_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="STOCKS">
+          <Key>
+            <PropertyRef Name="STOCK_ID" />
+          </Key>
+          <Property Name="STOCK_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ADDRESS" Type="varchar" MaxLength="150" />
+          <Property Name="PHONE_NUMBER" Type="varchar" MaxLength="150" />
+          <Property Name="STOCK_NAME" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="STORE">
+          <Key>
+            <PropertyRef Name="STORE_ID" />
+          </Key>
+          <Property Name="STORE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STORE_NAME" Type="varchar" MaxLength="150" />
+          <Property Name="ADDRESS" Type="varchar" MaxLength="150" />
+          <Property Name="PHONE_NUMBER" Type="varchar" MaxLength="150" />
+          <Property Name="DIRECTOR" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="SUPPLIERS">
+          <Key>
+            <PropertyRef Name="SUPPLIER_ID" />
+          </Key>
+          <Property Name="SUPPLIER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SUPPLIERS_NAME" Type="varchar" MaxLength="150" />
+          <Property Name="ADDRESS" Type="varchar" MaxLength="150" />
+          <Property Name="PHONE_NUMBER" Type="varchar" MaxLength="150" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="WAREHOUSE">
+          <Key>
+            <PropertyRef Name="ITEM_ID" />
+          </Key>
+          <Property Name="ITEM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ITEM_DESCRIPTION" Type="varchar" MaxLength="150" />
+          <Property Name="QUANTITY" Type="float" />
+          <Property Name="SOK" Type="int" />
+        </EntityType>
+        <Association Name="FK__ITEMS_PUR__ITEM___56E8E7AB">
+          <End Role="ITEMS" Type="Self.ITEMS" Multiplicity="0..1" />
+          <End Role="ITEMS_PURCHASE" Type="Self.ITEMS_PURCHASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ITEMS">
+              <PropertyRef Name="ITEM_ID" />
+            </Principal>
+            <Dependent Role="ITEMS_PURCHASE">
+              <PropertyRef Name="ITEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ITEMS_PUR__STOCK__57DD0BE4">
+          <End Role="STOCKS" Type="Self.STOCKS" Multiplicity="0..1" />
+          <End Role="ITEMS_PURCHASE" Type="Self.ITEMS_PURCHASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STOCKS">
+              <PropertyRef Name="STOCK_ID" />
+            </Principal>
+            <Dependent Role="ITEMS_PURCHASE">
+              <PropertyRef Name="STOCK_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ITEMS_PUR__SUPPL__58D1301D">
+          <End Role="SUPPLIERS" Type="Self.SUPPLIERS" Multiplicity="0..1" />
+          <End Role="ITEMS_PURCHASE" Type="Self.ITEMS_PURCHASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPPLIERS">
+              <PropertyRef Name="SUPPLIER_ID" />
+            </Principal>
+            <Dependent Role="ITEMS_PURCHASE">
+              <PropertyRef Name="SUPPLIER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MOVE_ORDE__ITEM___0A9D95DB">
+          <End Role="ITEMS" Type="Self.ITEMS" Multiplicity="0..1" />
+          <End Role="MOVE_ORDERS" Type="Self.MOVE_ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ITEMS">
+              <PropertyRef Name="ITEM_ID" />
+            </Principal>
+            <Dependent Role="MOVE_ORDERS">
+              <PropertyRef Name="ITEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MOVE_ORDE__STOCK__0C85DE4D">
+          <End Role="STOCKS" Type="Self.STOCKS" Multiplicity="0..1" />
+          <End Role="MOVE_ORDERS" Type="Self.MOVE_ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STOCKS">
+              <PropertyRef Name="STOCK_ID" />
+            </Principal>
+            <Dependent Role="MOVE_ORDERS">
+              <PropertyRef Name="STOCK_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MOVE_ORDE__STORE__0B91BA14">
+          <End Role="STORE" Type="Self.STORE" Multiplicity="0..1" />
+          <End Role="MOVE_ORDERS" Type="Self.MOVE_ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STORE">
+              <PropertyRef Name="STORE_ID" />
+            </Principal>
+            <Dependent Role="MOVE_ORDERS">
+              <PropertyRef Name="STORE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+ошибка 6004: Невозможно найти таблицу "TestDB.dbo.QUANTITY_IN_STORE", на которую ссылается связь.
+        <Association Name="FK__QUANTITY___ITEM___160F4887" />-->
+        <!--Ошибки, обнаруженные при создании:
+ошибка 6004: Невозможно найти таблицу "TestDB.dbo.QUANTITY_ORDERED", на которую ссылается связь.
+        <Association Name="FK__QUANTITY___ITEM___7AF13DF7" />-->
+        <!--Ошибки, обнаруженные при создании:
+ошибка 6004: Невозможно найти таблицу "TestDB.dbo.QUANTITY_ORDERED", на которую ссылается связь.
+        <Association Name="FK__QUANTITY___STOCK__79FD19BE" />-->
+        <!--Ошибки, обнаруженные при создании:
+ошибка 6004: Невозможно найти таблицу "TestDB.dbo.QUANTITY_IN_STORE", на которую ссылается связь.
+        <Association Name="FK__QUANTITY___STORE__151B244E" />-->
+        <Association Name="FK__SALES_STO__BUYER__5D95E53A">
+          <End Role="BUYERS" Type="Self.BUYERS" Multiplicity="0..1" />
+          <End Role="SALES_STORE" Type="Self.SALES_STORE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BUYERS">
+              <PropertyRef Name="BUYER_ID" />
+            </Principal>
+            <Dependent Role="SALES_STORE">
+              <PropertyRef Name="BUYER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALES_STO__ITEM___5BAD9CC8">
+          <End Role="ITEMS" Type="Self.ITEMS" Multiplicity="0..1" />
+          <End Role="SALES_STORE" Type="Self.SALES_STORE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ITEMS">
+              <PropertyRef Name="ITEM_ID" />
+            </Principal>
+            <Dependent Role="SALES_STORE">
+              <PropertyRef Name="ITEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALES_STO__STORE__5CA1C101">
+          <End Role="STORE" Type="Self.STORE" Multiplicity="0..1" />
+          <End Role="SALES_STORE" Type="Self.SALES_STORE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STORE">
+              <PropertyRef Name="STORE_ID" />
+            </Principal>
+            <Dependent Role="SALES_STORE">
+              <PropertyRef Name="STORE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TestDBModelContainer">
+          <EntitySet Name="BUYERS" EntityType="Self.BUYERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DISTRICT" EntityType="Self.DISTRICT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ITEMS" EntityType="Self.ITEMS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ITEMS_CATEGORY" EntityType="Self.ITEMS_CATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ITEMS_PURCHASE" EntityType="Self.ITEMS_PURCHASE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOVE_ORDERS" EntityType="Self.MOVE_ORDERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SALES" EntityType="Self.SALES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SALES_STORE" EntityType="Self.SALES_STORE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STOCKS" EntityType="Self.STOCKS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STORE" EntityType="Self.STORE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUPPLIERS" EntityType="Self.SUPPLIERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WAREHOUSE" EntityType="Self.WAREHOUSE" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ITEMS_PUR__ITEM___56E8E7AB" Association="Self.FK__ITEMS_PUR__ITEM___56E8E7AB">
+            <End Role="ITEMS" EntitySet="ITEMS" />
+            <End Role="ITEMS_PURCHASE" EntitySet="ITEMS_PURCHASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ITEMS_PUR__STOCK__57DD0BE4" Association="Self.FK__ITEMS_PUR__STOCK__57DD0BE4">
+            <End Role="STOCKS" EntitySet="STOCKS" />
+            <End Role="ITEMS_PURCHASE" EntitySet="ITEMS_PURCHASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ITEMS_PUR__SUPPL__58D1301D" Association="Self.FK__ITEMS_PUR__SUPPL__58D1301D">
+            <End Role="SUPPLIERS" EntitySet="SUPPLIERS" />
+            <End Role="ITEMS_PURCHASE" EntitySet="ITEMS_PURCHASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MOVE_ORDE__ITEM___0A9D95DB" Association="Self.FK__MOVE_ORDE__ITEM___0A9D95DB">
+            <End Role="ITEMS" EntitySet="ITEMS" />
+            <End Role="MOVE_ORDERS" EntitySet="MOVE_ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MOVE_ORDE__STOCK__0C85DE4D" Association="Self.FK__MOVE_ORDE__STOCK__0C85DE4D">
+            <End Role="STOCKS" EntitySet="STOCKS" />
+            <End Role="MOVE_ORDERS" EntitySet="MOVE_ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MOVE_ORDE__STORE__0B91BA14" Association="Self.FK__MOVE_ORDE__STORE__0B91BA14">
+            <End Role="STORE" EntitySet="STORE" />
+            <End Role="MOVE_ORDERS" EntitySet="MOVE_ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALES_STO__BUYER__5D95E53A" Association="Self.FK__SALES_STO__BUYER__5D95E53A">
+            <End Role="BUYERS" EntitySet="BUYERS" />
+            <End Role="SALES_STORE" EntitySet="SALES_STORE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALES_STO__ITEM___5BAD9CC8" Association="Self.FK__SALES_STO__ITEM___5BAD9CC8">
+            <End Role="ITEMS" EntitySet="ITEMS" />
+            <End Role="SALES_STORE" EntitySet="SALES_STORE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALES_STO__STORE__5CA1C101" Association="Self.FK__SALES_STO__STORE__5CA1C101">
+            <End Role="STORE" EntitySet="STORE" />
+            <End Role="SALES_STORE" EntitySet="SALES_STORE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BUYERS">
+          <Key>
+            <PropertyRef Name="BUYER_ID" />
+          </Key>
+          <Property Name="BUYER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BUYER_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE_NUMBER" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SALES_STORE" Relationship="Self.FK__SALES_STO__BUYER__5D95E53A" FromRole="BUYERS" ToRole="SALES_STORE" />
+        </EntityType>
+        <EntityType Name="DISTRICT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ITEMS">
+          <Key>
+            <PropertyRef Name="ITEM_ID" />
+          </Key>
+          <Property Name="ITEM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ITEM_DESRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CATEGORY_ID" Type="Int32" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="ITEMS_PURCHASE" Relationship="Self.FK__ITEMS_PUR__ITEM___56E8E7AB" FromRole="ITEMS" ToRole="ITEMS_PURCHASE" />
+          <NavigationProperty Name="MOVE_ORDERS" Relationship="Self.FK__MOVE_ORDE__ITEM___0A9D95DB" FromRole="ITEMS" ToRole="MOVE_ORDERS" />
+          <NavigationProperty Name="SALES_STORE" Relationship="Self.FK__SALES_STO__ITEM___5BAD9CC8" FromRole="ITEMS" ToRole="SALES_STORE" />
+        </EntityType>
+        <EntityType Name="ITEMS_CATEGORY">
+          <Key>
+            <PropertyRef Name="CATEGORY_ID" />
+          </Key>
+          <Property Name="CATEGORY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CATEGORY_DESRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ITEMS_PURCHASE">
+          <Key>
+            <PropertyRef Name="PURCHASE_ID" />
+          </Key>
+          <Property Name="PURCHASE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PURCHASE_NUMBER" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ITEM_ID" Type="Int32" />
+          <Property Name="PRICE" Type="Double" />
+          <Property Name="QUANTITY" Type="Double" />
+          <Property Name="PURCHASE_DATE" Type="DateTime" Precision="0" />
+          <Property Name="STOCK_ID" Type="Int32" />
+          <Property Name="SUPPLIER_ID" Type="Int32" />
+          <NavigationProperty Name="ITEMS" Relationship="Self.FK__ITEMS_PUR__ITEM___56E8E7AB" FromRole="ITEMS_PURCHASE" ToRole="ITEMS" />
+          <NavigationProperty Name="STOCKS" Relationship="Self.FK__ITEMS_PUR__STOCK__57DD0BE4" FromRole="ITEMS_PURCHASE" ToRole="STOCKS" />
+          <NavigationProperty Name="SUPPLIERS" Relationship="Self.FK__ITEMS_PUR__SUPPL__58D1301D" FromRole="ITEMS_PURCHASE" ToRole="SUPPLIERS" />
+        </EntityType>
+        <EntityType Name="MOVE_ORDERS">
+          <Key>
+            <PropertyRef Name="MOVE_ORDER_ID" />
+          </Key>
+          <Property Name="MOVE_ORDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MOVE_ORDER_NUMBER" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ITEM_ID" Type="Int32" />
+          <Property Name="PRICE" Type="Double" />
+          <Property Name="QUANTITY" Type="Double" />
+          <Property Name="STORE_ID" Type="Int32" />
+          <Property Name="STOCK_ID" Type="Int32" />
+          <NavigationProperty Name="ITEMS" Relationship="Self.FK__MOVE_ORDE__ITEM___0A9D95DB" FromRole="MOVE_ORDERS" ToRole="ITEMS" />
+          <NavigationProperty Name="STOCKS" Relationship="Self.FK__MOVE_ORDE__STOCK__0C85DE4D" FromRole="MOVE_ORDERS" ToRole="STOCKS" />
+          <NavigationProperty Name="STORE" Relationship="Self.FK__MOVE_ORDE__STORE__0B91BA14" FromRole="MOVE_ORDERS" ToRole="STORE" />
+        </EntityType>
+        <EntityType Name="SALES">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORDER_NUMBER" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ITEM_ID" Type="Int32" />
+          <Property Name="PRICE" Type="Double" />
+          <Property Name="OREDER_QUANTITY" Type="Double" />
+          <Property Name="CREATION_DATE" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="SALES_STORE">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORDER_NUMBER" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ITEM_ID" Type="Int32" />
+          <Property Name="PRICE" Type="Double" />
+          <Property Name="QUANTITY" Type="Double" />
+          <Property Name="PURCHASE_DATE" Type="DateTime" Precision="0" />
+          <Property Name="STORE_ID" Type="Int32" />
+          <Property Name="BUYER_ID" Type="Int32" />
+          <NavigationProperty Name="BUYERS" Relationship="Self.FK__SALES_STO__BUYER__5D95E53A" FromRole="SALES_STORE" ToRole="BUYERS" />
+          <NavigationProperty Name="ITEMS" Relationship="Self.FK__SALES_STO__ITEM___5BAD9CC8" FromRole="SALES_STORE" ToRole="ITEMS" />
+          <NavigationProperty Name="STORE" Relationship="Self.FK__SALES_STO__STORE__5CA1C101" FromRole="SALES_STORE" ToRole="STORE" />
+        </EntityType>
+        <EntityType Name="STOCKS">
+          <Key>
+            <PropertyRef Name="STOCK_ID" />
+          </Key>
+          <Property Name="STOCK_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ADDRESS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE_NUMBER" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="STOCK_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ITEMS_PURCHASE" Relationship="Self.FK__ITEMS_PUR__STOCK__57DD0BE4" FromRole="STOCKS" ToRole="ITEMS_PURCHASE" />
+          <NavigationProperty Name="MOVE_ORDERS" Relationship="Self.FK__MOVE_ORDE__STOCK__0C85DE4D" FromRole="STOCKS" ToRole="MOVE_ORDERS" />
+        </EntityType>
+        <EntityType Name="STORE">
+          <Key>
+            <PropertyRef Name="STORE_ID" />
+          </Key>
+          <Property Name="STORE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STORE_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE_NUMBER" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECTOR" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MOVE_ORDERS" Relationship="Self.FK__MOVE_ORDE__STORE__0B91BA14" FromRole="STORE" ToRole="MOVE_ORDERS" />
+          <NavigationProperty Name="SALES_STORE" Relationship="Self.FK__SALES_STO__STORE__5CA1C101" FromRole="STORE" ToRole="SALES_STORE" />
+        </EntityType>
+        <EntityType Name="SUPPLIERS">
+          <Key>
+            <PropertyRef Name="SUPPLIER_ID" />
+          </Key>
+          <Property Name="SUPPLIER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SUPPLIERS_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE_NUMBER" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="ITEMS_PURCHASE" Relationship="Self.FK__ITEMS_PUR__SUPPL__58D1301D" FromRole="SUPPLIERS" ToRole="ITEMS_PURCHASE" />
+        </EntityType>
+        <EntityType Name="WAREHOUSE">
+          <Key>
+            <PropertyRef Name="ITEM_ID" />
+          </Key>
+          <Property Name="ITEM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ITEM_DESCRIPTION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTITY" Type="Double" />
+          <Property Name="SOK" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__SALES_STO__BUYER__5D95E53A">
+          <End Role="BUYERS" Type="Self.BUYERS" Multiplicity="0..1" />
+          <End Role="SALES_STORE" Type="Self.SALES_STORE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BUYERS">
+              <PropertyRef Name="BUYER_ID" />
+            </Principal>
+            <Dependent Role="SALES_STORE">
+              <PropertyRef Name="BUYER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ITEMS_PUR__ITEM___56E8E7AB">
+          <End Role="ITEMS" Type="Self.ITEMS" Multiplicity="0..1" />
+          <End Role="ITEMS_PURCHASE" Type="Self.ITEMS_PURCHASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ITEMS">
+              <PropertyRef Name="ITEM_ID" />
+            </Principal>
+            <Dependent Role="ITEMS_PURCHASE">
+              <PropertyRef Name="ITEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MOVE_ORDE__ITEM___0A9D95DB">
+          <End Role="ITEMS" Type="Self.ITEMS" Multiplicity="0..1" />
+          <End Role="MOVE_ORDERS" Type="Self.MOVE_ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ITEMS">
+              <PropertyRef Name="ITEM_ID" />
+            </Principal>
+            <Dependent Role="MOVE_ORDERS">
+              <PropertyRef Name="ITEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALES_STO__ITEM___5BAD9CC8">
+          <End Role="ITEMS" Type="Self.ITEMS" Multiplicity="0..1" />
+          <End Role="SALES_STORE" Type="Self.SALES_STORE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ITEMS">
+              <PropertyRef Name="ITEM_ID" />
+            </Principal>
+            <Dependent Role="SALES_STORE">
+              <PropertyRef Name="ITEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ITEMS_PUR__STOCK__57DD0BE4">
+          <End Role="STOCKS" Type="Self.STOCKS" Multiplicity="0..1" />
+          <End Role="ITEMS_PURCHASE" Type="Self.ITEMS_PURCHASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STOCKS">
+              <PropertyRef Name="STOCK_ID" />
+            </Principal>
+            <Dependent Role="ITEMS_PURCHASE">
+              <PropertyRef Name="STOCK_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ITEMS_PUR__SUPPL__58D1301D">
+          <End Role="SUPPLIERS" Type="Self.SUPPLIERS" Multiplicity="0..1" />
+          <End Role="ITEMS_PURCHASE" Type="Self.ITEMS_PURCHASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPPLIERS">
+              <PropertyRef Name="SUPPLIER_ID" />
+            </Principal>
+            <Dependent Role="ITEMS_PURCHASE">
+              <PropertyRef Name="SUPPLIER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MOVE_ORDE__STOCK__0C85DE4D">
+          <End Role="STOCKS" Type="Self.STOCKS" Multiplicity="0..1" />
+          <End Role="MOVE_ORDERS" Type="Self.MOVE_ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STOCKS">
+              <PropertyRef Name="STOCK_ID" />
+            </Principal>
+            <Dependent Role="MOVE_ORDERS">
+              <PropertyRef Name="STOCK_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MOVE_ORDE__STORE__0B91BA14">
+          <End Role="STORE" Type="Self.STORE" Multiplicity="0..1" />
+          <End Role="MOVE_ORDERS" Type="Self.MOVE_ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STORE">
+              <PropertyRef Name="STORE_ID" />
+            </Principal>
+            <Dependent Role="MOVE_ORDERS">
+              <PropertyRef Name="STORE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALES_STO__STORE__5CA1C101">
+          <End Role="STORE" Type="Self.STORE" Multiplicity="0..1" />
+          <End Role="SALES_STORE" Type="Self.SALES_STORE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STORE">
+              <PropertyRef Name="STORE_ID" />
+            </Principal>
+            <Dependent Role="SALES_STORE">
+              <PropertyRef Name="STORE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BUYERS" EntityType="Self.BUYERS" />
+          <EntitySet Name="DISTRICT" EntityType="Self.DISTRICT" />
+          <EntitySet Name="ITEMS" EntityType="Self.ITEMS" />
+          <EntitySet Name="ITEMS_CATEGORY" EntityType="Self.ITEMS_CATEGORY" />
+          <EntitySet Name="ITEMS_PURCHASE" EntityType="Self.ITEMS_PURCHASE" />
+          <EntitySet Name="MOVE_ORDERS" EntityType="Self.MOVE_ORDERS" />
+          <EntitySet Name="SALES" EntityType="Self.SALES" />
+          <EntitySet Name="SALES_STORE" EntityType="Self.SALES_STORE" />
+          <EntitySet Name="STOCKS" EntityType="Self.STOCKS" />
+          <EntitySet Name="STORE" EntityType="Self.STORE" />
+          <EntitySet Name="SUPPLIERS" EntityType="Self.SUPPLIERS" />
+          <EntitySet Name="WAREHOUSE" EntityType="Self.WAREHOUSE" />
+          <AssociationSet Name="FK__SALES_STO__BUYER__5D95E53A" Association="Self.FK__SALES_STO__BUYER__5D95E53A">
+            <End Role="BUYERS" EntitySet="BUYERS" />
+            <End Role="SALES_STORE" EntitySet="SALES_STORE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ITEMS_PUR__ITEM___56E8E7AB" Association="Self.FK__ITEMS_PUR__ITEM___56E8E7AB">
+            <End Role="ITEMS" EntitySet="ITEMS" />
+            <End Role="ITEMS_PURCHASE" EntitySet="ITEMS_PURCHASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MOVE_ORDE__ITEM___0A9D95DB" Association="Self.FK__MOVE_ORDE__ITEM___0A9D95DB">
+            <End Role="ITEMS" EntitySet="ITEMS" />
+            <End Role="MOVE_ORDERS" EntitySet="MOVE_ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALES_STO__ITEM___5BAD9CC8" Association="Self.FK__SALES_STO__ITEM___5BAD9CC8">
+            <End Role="ITEMS" EntitySet="ITEMS" />
+            <End Role="SALES_STORE" EntitySet="SALES_STORE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ITEMS_PUR__STOCK__57DD0BE4" Association="Self.FK__ITEMS_PUR__STOCK__57DD0BE4">
+            <End Role="STOCKS" EntitySet="STOCKS" />
+            <End Role="ITEMS_PURCHASE" EntitySet="ITEMS_PURCHASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ITEMS_PUR__SUPPL__58D1301D" Association="Self.FK__ITEMS_PUR__SUPPL__58D1301D">
+            <End Role="SUPPLIERS" EntitySet="SUPPLIERS" />
+            <End Role="ITEMS_PURCHASE" EntitySet="ITEMS_PURCHASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MOVE_ORDE__STOCK__0C85DE4D" Association="Self.FK__MOVE_ORDE__STOCK__0C85DE4D">
+            <End Role="STOCKS" EntitySet="STOCKS" />
+            <End Role="MOVE_ORDERS" EntitySet="MOVE_ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MOVE_ORDE__STORE__0B91BA14" Association="Self.FK__MOVE_ORDE__STORE__0B91BA14">
+            <End Role="STORE" EntitySet="STORE" />
+            <End Role="MOVE_ORDERS" EntitySet="MOVE_ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALES_STO__STORE__5CA1C101" Association="Self.FK__SALES_STO__STORE__5CA1C101">
+            <End Role="STORE" EntitySet="STORE" />
+            <End Role="SALES_STORE" EntitySet="SALES_STORE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TestDBModelContainer" CdmEntityContainer="TestDBEntities">
+          <EntitySetMapping Name="BUYERS">
+            <EntityTypeMapping TypeName="TestDBModel.BUYERS">
+              <MappingFragment StoreEntitySet="BUYERS">
+                <ScalarProperty Name="BUYER_ID" ColumnName="BUYER_ID" />
+                <ScalarProperty Name="BUYER_NAME" ColumnName="BUYER_NAME" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DISTRICT">
+            <EntityTypeMapping TypeName="TestDBModel.DISTRICT">
+              <MappingFragment StoreEntitySet="DISTRICT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ITEMS">
+            <EntityTypeMapping TypeName="TestDBModel.ITEMS">
+              <MappingFragment StoreEntitySet="ITEMS">
+                <ScalarProperty Name="ITEM_ID" ColumnName="ITEM_ID" />
+                <ScalarProperty Name="ITEM_DESRIPTION" ColumnName="ITEM_DESRIPTION" />
+                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ITEMS_CATEGORY">
+            <EntityTypeMapping TypeName="TestDBModel.ITEMS_CATEGORY">
+              <MappingFragment StoreEntitySet="ITEMS_CATEGORY">
+                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
+                <ScalarProperty Name="CATEGORY_DESRIPTION" ColumnName="CATEGORY_DESRIPTION" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ITEMS_PURCHASE">
+            <EntityTypeMapping TypeName="TestDBModel.ITEMS_PURCHASE">
+              <MappingFragment StoreEntitySet="ITEMS_PURCHASE">
+                <ScalarProperty Name="PURCHASE_ID" ColumnName="PURCHASE_ID" />
+                <ScalarProperty Name="PURCHASE_NUMBER" ColumnName="PURCHASE_NUMBER" />
+                <ScalarProperty Name="ITEM_ID" ColumnName="ITEM_ID" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="PURCHASE_DATE" ColumnName="PURCHASE_DATE" />
+                <ScalarProperty Name="STOCK_ID" ColumnName="STOCK_ID" />
+                <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOVE_ORDERS">
+            <EntityTypeMapping TypeName="TestDBModel.MOVE_ORDERS">
+              <MappingFragment StoreEntitySet="MOVE_ORDERS">
+                <ScalarProperty Name="MOVE_ORDER_ID" ColumnName="MOVE_ORDER_ID" />
+                <ScalarProperty Name="MOVE_ORDER_NUMBER" ColumnName="MOVE_ORDER_NUMBER" />
+                <ScalarProperty Name="ITEM_ID" ColumnName="ITEM_ID" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+                <ScalarProperty Name="STOCK_ID" ColumnName="STOCK_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALES">
+            <EntityTypeMapping TypeName="TestDBModel.SALES">
+              <MappingFragment StoreEntitySet="SALES">
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
+                <ScalarProperty Name="ITEM_ID" ColumnName="ITEM_ID" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="OREDER_QUANTITY" ColumnName="OREDER_QUANTITY" />
+                <ScalarProperty Name="CREATION_DATE" ColumnName="CREATION_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALES_STORE">
+            <EntityTypeMapping TypeName="TestDBModel.SALES_STORE">
+              <MappingFragment StoreEntitySet="SALES_STORE">
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
+                <ScalarProperty Name="ITEM_ID" ColumnName="ITEM_ID" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="PURCHASE_DATE" ColumnName="PURCHASE_DATE" />
+                <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+                <ScalarProperty Name="BUYER_ID" ColumnName="BUYER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STOCKS">
+            <EntityTypeMapping TypeName="TestDBModel.STOCKS">
+              <MappingFragment StoreEntitySet="STOCKS">
+                <ScalarProperty Name="STOCK_ID" ColumnName="STOCK_ID" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
+                <ScalarProperty Name="STOCK_NAME" ColumnName="STOCK_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STORE">
+            <EntityTypeMapping TypeName="TestDBModel.STORE">
+              <MappingFragment StoreEntitySet="STORE">
+                <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+                <ScalarProperty Name="STORE_NAME" ColumnName="STORE_NAME" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
+                <ScalarProperty Name="DIRECTOR" ColumnName="DIRECTOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUPPLIERS">
+            <EntityTypeMapping TypeName="TestDBModel.SUPPLIERS">
+              <MappingFragment StoreEntitySet="SUPPLIERS">
+                <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
+                <ScalarProperty Name="SUPPLIERS_NAME" ColumnName="SUPPLIERS_NAME" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WAREHOUSE">
+            <EntityTypeMapping TypeName="TestDBModel.WAREHOUSE">
+              <MappingFragment StoreEntitySet="WAREHOUSE">
+                <ScalarProperty Name="ITEM_ID" ColumnName="ITEM_ID" />
+                <ScalarProperty Name="ITEM_DESCRIPTION" ColumnName="ITEM_DESCRIPTION" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="SOK" ColumnName="SOK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

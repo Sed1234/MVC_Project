@@ -1,0 +1,69 @@
+﻿@model IEnumerable<SaleCo.Models.ITEMS_PURCHASE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PURCHASE_NUMBER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRICE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QUANTITY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PURCHASE_DATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ITEMS.ITEM_DESRIPTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STOCKS.ADDRESS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SUPPLIERS.SUPPLIERS_NAME)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PURCHASE_NUMBER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRICE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QUANTITY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PURCHASE_DATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ITEMS.ITEM_DESRIPTION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STOCKS.ADDRESS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SUPPLIERS.SUPPLIERS_NAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PURCHASE_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PURCHASE_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PURCHASE_ID })
+        </td>
+    </tr>
+}
+
+</table>
